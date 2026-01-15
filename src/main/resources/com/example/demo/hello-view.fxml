@@ -17,7 +17,10 @@
                 <Insets bottom="5.0" left="20.0" right="20.0" top="15.0" />
             </VBox.margin>
             <menus>
-                <Menu mnemonicParsing="false" text="Soubor" />
+                <Menu mnemonicParsing="false" text="Soubor">
+               <items>
+                  <MenuItem fx:id="vypnout" mnemonicParsing="false" onAction="#onVypnoutButtonClick" text="vypnout" />
+               </items></Menu>
                 <Menu mnemonicParsing="false" text="O aplikaci">
                     <items>
                         <MenuItem mnemonicParsing="false" text="O aplikaci" />

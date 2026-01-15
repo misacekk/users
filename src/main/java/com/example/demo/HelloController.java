@@ -57,7 +57,7 @@ public class HelloController {
                 nameField.clear();
                 nicknameField.clear();
                 phoneField.clear();
-            }else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Informace");
                 alert.setHeaderText("Dulezite upozorneni");
@@ -65,5 +65,8 @@ public class HelloController {
                 alert.showAndWait();
             }
         }
+    }@FXML
+    protected void onVypnoutButtonClick(){
+        System.exit(0);
     }
 }
