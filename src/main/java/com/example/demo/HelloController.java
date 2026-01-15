@@ -1,0 +1,69 @@
+package com.example.demo;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+import java.util.Optional;
+
+public class HelloController {
+    @FXML
+    private TextField nameField, nicknameField, phoneField;
+    @FXML
+    private ListView<com.example.demo.User> listViewUsers;
+    @FXML
+    private Button addContactButton, deleteButton, updateButton;
+    @FXML
+    private final ObservableList<com.example.demo.User> listUsers = FXCollections.observableArrayList();
+
+    @FXML
+    protected void initialize() {
+        listUsers.add(new com.example.demo.User("Jan Novak","Honzi","888999111"));
+        listUsers.add(new com.example.demo.User("Ondra Musil","Kokot","123456789"));
+        listViewUsers.setItems(listUsers);
+    }
+
+    @FXML
+    protected void onAddContactButtonClick() {
+        if (!nameField.getText().isEmpty() && !nicknameField.getText().isEmpty() && !phoneField.getText().isEmpty()) {
+            listUsers.add(new com.example.demo.User(nameField.getText(),nicknameField.getText(),phoneField.getText()));
+            listViewUsers.setItems(listUsers);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Informace");
+            alert.setHeaderText("Dulezite upozorneni");
+            alert.setContentText("Pro pridani kontaktu je nutne vyplnit vsechna pole.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    protected void onDeleteButtonClick() {
+        com.example.demo.User user = listViewUsers.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            listViewUsers.getItems().remove(user);
+        }
+    }
+
+    @FXML
+    protected void onUpdateButtonClick() {
+        com.example.demo.User user = listViewUsers.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            if (!nameField.getText().isEmpty() && !nicknameField.getText().isEmpty() && !phoneField.getText().isEmpty()) {
+                user.setName(nameField.getText());
+                user.setNickname(nicknameField.getText());
+                user.setPhone(phoneField.getText());
+                nameField.clear();
+                nicknameField.clear();
+                phoneField.clear();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Informace");
+                alert.setHeaderText("Dulezite upozorneni");
+                alert.setContentText("Pro uprave kontaktu je nutne vyplnit vsechna pole.");
+                alert.showAndWait();
+            }
+        }
+    }
+}
